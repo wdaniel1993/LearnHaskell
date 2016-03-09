@@ -1,8 +1,9 @@
 module Main where
+  main = interact shortLinesOnly
 
-  doubleMe x = x * 2
-
-  getFourth numbers = numbers !! 3
-
-  main :: IO ()
-  main = print (doubleMe (getFourth [1,2,3,4,5]))
+  shortLinesOnly :: String -> String
+  shortLinesOnly input =
+      let allLines = lines input
+          shortLines = filter (\line -> length line < 10) allLines
+          result = unlines shortLines
+      in  result  
