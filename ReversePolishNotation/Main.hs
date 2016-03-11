@@ -41,7 +41,7 @@ parseExp (x:xs)
 calculateRPN ::[Expression] -> Double
 calculateRPN e = head $ foldl (\stack ex -> case ex of
   Number d -> d:stack
-  Operation o -> (foldr1 o $ take 2 stack):(tail $ tail stack)) [] e
+  Operation o -> (foldl1 o $ reverse $ take 2 stack):(tail $ tail stack)) [] e
 
 main = do
   line <- getLine
