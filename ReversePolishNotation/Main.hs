@@ -39,9 +39,9 @@ parseExp (x:xs)
   where buildExp h = h:parseExp xs
 
 calculateRPN ::[Expression] -> Double
-calculateRPN e = head $ foldl (\stack ex -> case ex of
-  Number d -> d:stack
-  Operation o -> (foldl1 o $ reverse $ take 2 stack):(tail $ tail stack)) [] e
+calculateRPN e = head $ foldl foldingMethod [] e
+    where foldingMethod stack (Number d) = d:stack
+          foldingMethod (x:y:xs) (Operation o) = (o y x):xs
 
 main = do
   line <- getLine
@@ -49,5 +49,5 @@ main = do
     do
       let
         w = words line
-        exps = parseExp w
-      putStrLn $ show $ calculateRPN exps
+        e = parseExp w
+      putStrLn $ show $ calculateRPN e
