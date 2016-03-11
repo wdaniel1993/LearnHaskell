@@ -27,10 +27,8 @@ parseDouble str =
       _         -> Nothing
 
 parseOperation:: String -> Maybe (Double  -> Double  -> Double )
-parseOperation str =
-    case reads str :: [(Char, String)] of
-      [(a, "")] -> lookup a dispatch
-      _         -> Nothing
+parseOperation [a] = lookup a dispatch
+parseOperation _ = Nothing
 
 parseExp ::[String] -> [Expression]
 parseExp [] = []
