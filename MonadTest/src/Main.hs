@@ -1,2 +1,2 @@
 module Main where
-    main = print 123
+    main = print 1234
